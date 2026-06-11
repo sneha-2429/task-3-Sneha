@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Database Management</title>
+
+    <style>
+
+        body{
+            font-family:Arial;
+            text-align:center;
+            margin-top:50px;
+        }
+
+        input{
+            padding:10px;
+            margin:10px;
+        }
+
+        button{
+            padding:10px 20px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<h1>Student Database Management</h1>
+
+<input type="text"
+       id="name"
+       placeholder="Enter Name">
+
+<input type="number"
+       id="age"
+       placeholder="Enter Age">
+
+<br>
+
+<button onclick="addStudent()">
+    Add Student
+</button>
+
+<script>
+
+function addStudent(){
+
+    fetch("/students",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+
+            name:document.getElementById("name").value,
+
+            age:document.getElementById("age").value
+
+        })
+
+    })
+
+    .then(response=>response.json())
+
+    .then(data=>{
+
+        alert(data.message);
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
